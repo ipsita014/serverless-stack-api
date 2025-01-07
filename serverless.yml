@@ -10,6 +10,21 @@ plugins:
   - serverless-offline
   - serverless-dotenv-plugin # Load .env as environment variables
 
+cors:
+  origin: '*'
+  headers:
+    - Content-Type
+    - X-Amz-Date
+    - Authorization
+    - X-Api-Key
+    - X-Amz-Security-Token
+    - X-Amz-User-Agent
+  allowCredentials: false
+
+  resources:
+  # API Gateway Errors
+    - ${file(resources/api-gateway-errors.yml)}
+
 provider:
   name: aws
   runtime: nodejs16.x
@@ -113,4 +128,6 @@ functions:
           method: delete
           cors: true
           authorizer: aws_iam
+
+  
           
